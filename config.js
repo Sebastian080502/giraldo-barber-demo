@@ -29,9 +29,22 @@ const barberConfig = {
     role: "Propietario",
   },
   images: {
-    hero: "img/hero.png",
+    hero: "img/video/hero.jpg",
     booking: "img/corte-barba.png",
   },
+  videos: {
+    hero: "img/video/hero.mp4",
+    heroPoster: "img/video/hero.jpg",
+    booking: "img/video/interior.mp4",
+    bookingPoster: "img/video/interior.jpg",
+  },
+  reels: [
+    { src: "img/video/reel-fade.mp4", poster: "img/video/reel-fade.jpg", label: "Fade", serviceId: "corte" },
+    { src: "img/video/reel-clipper.mp4", poster: "img/video/reel-clipper.jpg", label: "Máquina", serviceId: "corte" },
+    { src: "img/video/reel-cut.mp4", poster: "img/video/reel-cut.jpg", label: "Corte", serviceId: "premium" },
+    { src: "img/video/reel-barba.mp4", poster: "img/video/reel-barba.jpg", label: "Barba", serviceId: "barba" },
+    { src: "img/video/reel-reveal.mp4", poster: "img/video/reel-reveal.jpg", label: "Reveal", serviceId: "corte-barba" },
+  ],
   gallery: [
     { image: "img/fade.png", label: "Fade", serviceId: "corte" },
     { image: "img/textura.png", label: "Textura", serviceId: "corte" },

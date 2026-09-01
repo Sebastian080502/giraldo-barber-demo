@@ -381,21 +381,19 @@ function setBookStep(step) {
 function renderLanding() {
   const services = catalog().filter((s) => s.active);
   document.getElementById("landing-services").innerHTML = services.map((s) => `
-    <article class="service-card">
+    <button class="service-card visual-card" data-pick-service="${s.id}">
       <img src="${s.image}" alt="${s.name}" />
-      <div>
+      <div class="visual-meta">
         <h3>${s.name}</h3>
-        <p class="meta">${s.duration} min</p>
+        <span>${s.duration} min · ${money(s.price)}</span>
       </div>
-      <div class="price">${money(s.price)}</div>
-    </article>
+    </button>
   `).join("");
 
-  const items = barberConfig.gallery.concat(barberConfig.gallery);
-  document.getElementById("gallery-track").innerHTML = items.map((item) => `
-    <button class="cut-card" data-pick-service="${item.serviceId}">
-      <img src="${item.image}" alt="">
-      <span>${item.label}</span>
+  document.getElementById("reels").innerHTML = (barberConfig.reels || []).map((reel) => `
+    <button class="reel" data-pick-service="${reel.serviceId}">
+      <video muted loop playsinline preload="metadata" poster="${reel.poster}" src="${reel.src}"></video>
+      <span>${reel.label}</span>
     </button>
   `).join("");
 
@@ -416,6 +414,36 @@ function renderLanding() {
   }).join("");
 
   document.getElementById("date-hint").textContent = barberConfig.booking.closedHint;
+  bindMedia();
+}
+
+function bindMedia() {
+  const videos = barberConfig.videos || {};
+  const hero = document.getElementById("hero-video");
+  if (hero && videos.hero) {
+    hero.src = videos.hero;
+    hero.poster = videos.heroPoster || "";
+    hero.play().catch(() => {});
+  }
+  const interior = document.getElementById("interior-video");
+  if (interior && videos.booking) {
+    interior.src = videos.booking;
+    interior.play().catch(() => {});
+  }
+  const book = document.getElementById("book-video");
+  if (book && videos.booking) {
+    book.src = videos.booking;
+    book.play().catch(() => {});
+  }
+  document.querySelectorAll(".reel video").forEach((video) => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.play().catch(() => {});
+        else entry.target.pause();
+      });
+    }, { threshold: 0.55 });
+    io.observe(video);
+  });
 }
 
 function renderBook() {

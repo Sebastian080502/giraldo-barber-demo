@@ -11,191 +11,77 @@
 </head>
 <body>
   <div class="app">
-    <section class="view landing is-active" data-view="landing">
-      <div class="demo-ribbon">Demo de plataforma · personalizable para cualquier barbería</div>
+        <section class="view landing is-active" data-view="landing">
+      <div class="demo-ribbon">Demo · toca un corte y reserva</div>
       <div class="hero">
+        <video class="hero-video" id="hero-video" autoplay muted loop playsinline poster="img/video/hero.jpg" aria-hidden="true"></video>
         <div class="hero-bg" aria-hidden="true"></div>
         <div class="topbar">
           <div class="logo">
             <span class="logo-g" data-brand-mark>B</span>
             <span class="logo-text" data-brand-name>BARBER STUDIO</span>
           </div>
-          <button class="ghost-link" data-action="admin">Ver panel</button>
+          <button class="ghost-link" data-action="admin">Panel</button>
         </div>
-        <div>
-          <div class="hero-copy">
-            <div class="live-chip"><i></i> Sistema de reservas · demo en vivo</div>
-            <p class="eyebrow">Plataforma para barberías</p>
-            <h1 class="display">No es solo una reserva.<br>Es la experiencia de tu barbería.</h1>
-            <p class="place" data-brand-tagline>Tu estilo. Tu tiempo. Tu experiencia.</p>
-            <p class="hero-lead">Un sistema de reservas diseñado para que tus clientes agenden fácilmente y para que tú tengas el control de tu agenda.</p>
-          </div>
-          <div class="hero-actions">
-            <button class="btn btn-primary btn-full" data-action="book">Explorar demo</button>
-            <a class="btn btn-ghost btn-full" href="#como-funciona">Ver cómo funciona</a>
-          </div>
-          <div class="pillars">
-            <div class="pillar"><strong>01</strong>Experiencia premium</div>
-            <div class="pillar"><strong>02</strong>Agenda bajo control</div>
-            <div class="pillar"><strong>03</strong>100% personalizable</div>
-          </div>
+        <div class="hero-bottom">
+          <p class="eyebrow">Reserva en 30 segundos</p>
+          <h1 class="display">Tu corte.<br>Tu hora.</h1>
+          <button class="btn btn-primary btn-full" data-action="book">Reservar</button>
         </div>
       </div>
 
-      <section class="section brand-block">
-        <p class="eyebrow">Tu marca. Tu estilo. Tu sistema.</p>
-        <h2>Cada barbería es diferente.</h2>
-        <p class="lead">Por eso la experiencia puede adaptarse completamente a tu identidad visual, servicios, horarios, precios y forma de trabajar.</p>
-        <p class="editorial">Tu barbería merece una experiencia de reserva a la altura de tu marca.</p>
-      </section>
-
-      <section class="section" id="problema">
-        <h2>Deja de perder tiempo organizando citas.</h2>
-        <p class="lead">Menos mensajes. Menos confusión. Más tiempo para hacer lo que realmente importa.</p>
-        <div class="compare">
-          <article class="compare-card">
-            <span class="compare-kicker">Antes</span>
-            <ol>
-              <li>Cliente escribe por WhatsApp.</li>
-              <li>Pregunta disponibilidad.</li>
-              <li>Esperas para responder.</li>
-              <li>Revisas horarios.</li>
-              <li>Coordinas.</li>
-              <li>Confirmas manualmente.</li>
-            </ol>
-          </article>
-          <article class="compare-card after">
-            <span class="compare-kicker">Después</span>
-            <ol>
-              <li>Cliente entra al enlace.</li>
-              <li>Elige servicio.</li>
-              <li>Elige fecha.</li>
-              <li>Elige hora.</li>
-              <li>Confirma.</li>
-              <li>La cita queda registrada.</li>
-            </ol>
-          </article>
+      <section class="reel-band" id="cortes">
+        <div class="reel-head">
+          <h2>Looks</h2>
+          <span>Desliza · toca para reservar</span>
         </div>
+        <div class="reels" id="reels"></div>
       </section>
 
-      <section class="section experience">
-        <p class="eyebrow">Más que una reserva.</p>
-        <h2>No vendas solo un corte.<br>Vende una experiencia.</h2>
-        <p class="lead">Desde el primer clic hasta el momento del servicio, cada detalle comunica quién eres.</p>
-        <div class="quote-grid">
-          <blockquote>
-            <p>Tu sistema de reservas también es parte de tu marca.</p>
-          </blockquote>
-          <blockquote>
-            <p>Una experiencia digital a la altura de tu barbería.</p>
-          </blockquote>
-          <blockquote>
-            <p>Tu marca empieza desde el primer clic.</p>
-          </blockquote>
-        </div>
+      <section class="section tight" id="servicios">
+        <h2>Servicios</h2>
+        <div class="service-cards visual" id="landing-services"></div>
       </section>
 
-      <section class="section" id="estilos">
-        <h2>Diseñado para tu estilo</h2>
-        <p class="lead">El negro y el dorado es solo una posibilidad. Toca un estilo y mira cómo el sistema se adapta.</p>
+      <section class="section tight" id="estilos">
+        <h2>Elige el estilo</h2>
         <div class="style-grid" id="style-grid"></div>
       </section>
 
-      <section class="section" id="hecho">
-        <h2>Hecho para tu barbería</h2>
-        <p class="lead">Convierte tu agenda en una experiencia. Cada cliente. Cada cita. En un solo lugar.</p>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <span>01</span>
-            <h3>Identidad visual</h3>
-            <p>Tu logo, colores, fotografías y estilo.</p>
-          </article>
-          <article class="feature-card">
-            <span>02</span>
-            <h3>Servicios</h3>
-            <p>Configura tus servicios, precios y duración.</p>
-          </article>
-          <article class="feature-card">
-            <span>03</span>
-            <h3>Agenda</h3>
-            <p>Define tus horarios y disponibilidad.</p>
-          </article>
-          <article class="feature-card">
-            <span>04</span>
-            <h3>Clientes</h3>
-            <p>Organiza y consulta la información de tus clientes.</p>
-          </article>
-          <article class="feature-card">
-            <span>05</span>
-            <h3>Experiencia</h3>
-            <p>Una reserva pensada alrededor de tu negocio.</p>
-          </article>
+      <section class="flow-band" id="como-funciona">
+        <div class="flow-visual">
+          <video autoplay muted loop playsinline poster="img/video/interior.jpg" id="interior-video"></video>
+        </div>
+        <div class="flow-copy">
+          <p class="eyebrow">Sin WhatsApp eterno</p>
+          <ol class="flow-steps">
+            <li><strong>Mira</strong></li>
+            <li><strong>Elige</strong></li>
+            <li><strong>Agenda</strong></li>
+            <li><strong>Listo</strong></li>
+          </ol>
+          <button class="btn btn-primary btn-full" data-action="book">Probar reserva</button>
         </div>
       </section>
 
-      <section class="section" id="servicios">
-        <h2>Servicios de ejemplo</h2>
-        <p class="lead">Precios demostrativos. En el producto real se editan desde el panel de cada barbería.</p>
-        <div class="service-cards" id="landing-services"></div>
-      </section>
-
-      <section class="section" id="cortes">
-        <h2>La imagen de tu marca</h2>
-        <p class="lead">Fotografías genéricas para el demo. En un proyecto real se reemplazan por el archivo visual de tu barbería. Toca uno y empieza a reservar.</p>
-        <div class="marquee">
-          <div class="marquee-track" id="gallery-track"></div>
-        </div>
-      </section>
-
-      <section class="section" id="como-funciona">
-        <h2>Así de fácil</h2>
-        <p class="lead">Agenda sin mensajes interminables. Sin filas, sin espera y sin crear cuenta.</p>
-        <div class="steps">
-          <div class="step-row"><div class="step-num">01</div><div><strong>Servicio</strong><p class="hint">Elige qué se va a hacer. Precio y duración quedan claros.</p></div></div>
-          <div class="step-row"><div class="step-num">02</div><div><strong>Fecha</strong><p class="hint">Solo días con cupo real.</p></div></div>
-          <div class="step-row"><div class="step-num">03</div><div><strong>Hora</strong><p class="hint">Las ocupadas no aparecen.</p></div></div>
-          <div class="step-row"><div class="step-num">04</div><div><strong>Datos</strong><p class="hint">Nombre y WhatsApp. Sin formularios eternos.</p></div></div>
-          <div class="step-row"><div class="step-num">05</div><div><strong>Confirmación</strong><p class="hint">La cita queda registrada. El cupo se libera si no se reconfirma.</p></div></div>
-        </div>
-        <button class="btn btn-primary btn-full steps-cta" data-action="book">Reservar una cita de prueba</button>
-      </section>
-
-      <section class="section coming-soon">
+      <section class="section tight coming-soon">
         <p class="eyebrow">Próximamente</p>
-        <h2>Automatiza también tus conversaciones.</h2>
-        <p class="lead">Cuando tu volumen de clientes lo requiera, el sistema puede evolucionar para integrar WhatsApp y permitir que tus clientes consulten disponibilidad, agenden, confirmen, cancelen o reprogramen sus citas directamente desde la conversación.</p>
-        <p class="note-line">Es una evolución del sistema, no una función de este demo.</p>
-      </section>
-
-      <section class="section cta-close">
-        <h2>Esto podría ser el sistema de tu barbería.</h2>
-        <p class="lead">Un ejemplo de lo que podemos crear para tu marca: colores, servicios, horarios y forma de trabajar, a medida.</p>
-        <div class="hero-actions">
-          <button class="btn btn-primary btn-full" data-action="book">Explorar demo</button>
-          <button class="btn btn-ghost btn-full" data-action="admin">Ver el panel</button>
-        </div>
+        <p class="soon-line">WhatsApp automático, cuando el volumen lo pida.</p>
       </section>
 
       <footer class="footer">
         <div class="logo"><span class="logo-g" data-brand-mark>B</span><span class="logo-text" data-brand-name>BARBER STUDIO</span></div>
-        <p class="footer-line">Plataforma personalizada de reservas y gestión para barberías.</p>
-        <div class="socials">
-          <a data-social="instagram" href="#instagram">Instagram</a>
-          <a data-social="tiktok" href="#tiktok">TikTok</a>
-        </div>
-        <div class="qr-box">
-          <div class="qr-fake" aria-hidden="true"></div>
-          <div>
-            <strong data-brand-url>tu-barberia.com/reservar</strong>
-            <p>El enlace de la bio, WhatsApp y el QR.</p>
-          </div>
+        <div class="footer-actions">
+          <button class="btn btn-ghost" data-action="admin">Ver panel</button>
         </div>
       </footer>
     </section>
 
-    <section class="view" data-view="book">
+<section class="view" data-view="book">
       <div class="book-layout">
-        <aside class="book-visual" aria-hidden="true"></aside>
+        <aside class="book-visual" aria-hidden="true">
+          <video id="book-video" autoplay muted loop playsinline poster="img/video/interior.jpg"></video>
+        </aside>
         <div class="shell">
           <header class="screen-head">
             <div class="nav-row">

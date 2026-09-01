@@ -6,6 +6,8 @@ La identidad de este demo es **BARBER STUDIO**. Nombre, colores, servicios, hora
 
 **Demo en vivo:** [sebastian080502.github.io/giraldo-barber-demo](https://sebastian080502.github.io/giraldo-barber-demo/)
 
+Los clips de ejemplo son stock libre de [Mixkit](https://mixkit.co/free-stock-video/barber/) (licencia comercial). En un proyecto real se reemplazan por shorts y fotos de la barbería.
+
 ## Cómo abrirlo
 
 Abre `index.html` en el navegador (Chrome o Safari). En el celular se ve como la app.
