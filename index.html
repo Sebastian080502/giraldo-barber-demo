@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Giraldo Barber — Reserva tu cita</title>
+  <title>BARBER STUDIO — Plataforma de reservas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
@@ -12,121 +12,181 @@
 <body>
   <div class="app">
     <section class="view landing is-active" data-view="landing">
+      <div class="demo-ribbon">Demo de plataforma · personalizable para cualquier barbería</div>
       <div class="hero">
         <div class="hero-bg" aria-hidden="true"></div>
         <div class="topbar">
           <div class="logo">
-            <span class="logo-g">G</span>
-            <span class="logo-text">Giraldo Barber</span>
+            <span class="logo-g" data-brand-mark>B</span>
+            <span class="logo-text" data-brand-name>BARBER STUDIO</span>
           </div>
-          <button class="ghost-link" data-action="admin">Panel de Giraldo</button>
+          <button class="ghost-link" data-action="admin">Ver panel</button>
         </div>
         <div>
           <div class="hero-copy">
-            <div class="live-chip"><i></i> Agenda abierta ahora</div>
-            <p class="eyebrow">Barbería a domicilio · Neiva, Huila</p>
-            <h1 class="display">No es solo un corte.<br>Es tu mejor versión.</h1>
-            <p class="place">Tu corte. Donde quieras.</p>
+            <div class="live-chip"><i></i> Sistema de reservas · demo en vivo</div>
+            <p class="eyebrow">Plataforma para barberías</p>
+            <h1 class="display">No es solo una reserva.<br>Es la experiencia de tu barbería.</h1>
+            <p class="place" data-brand-tagline>Tu estilo. Tu tiempo. Tu experiencia.</p>
+            <p class="hero-lead">Un sistema de reservas diseñado para que tus clientes agenden fácilmente y para que tú tengas el control de tu agenda.</p>
           </div>
           <div class="hero-actions">
-            <button class="btn btn-primary btn-full" data-action="book">Reserva tu cita</button>
-            <a class="btn btn-ghost btn-full" href="#servicios">Ver servicios</a>
+            <button class="btn btn-primary btn-full" data-action="book">Explorar demo</button>
+            <a class="btn btn-ghost btn-full" href="#como-funciona">Ver cómo funciona</a>
           </div>
           <div class="pillars">
             <div class="pillar"><strong>01</strong>Experiencia premium</div>
-            <div class="pillar"><strong>02</strong>A domicilio</div>
-            <div class="pillar"><strong>03</strong>100% personalizado</div>
+            <div class="pillar"><strong>02</strong>Agenda bajo control</div>
+            <div class="pillar"><strong>03</strong>100% personalizable</div>
           </div>
         </div>
       </div>
 
+      <section class="section brand-block">
+        <p class="eyebrow">Tu marca. Tu estilo. Tu sistema.</p>
+        <h2>Cada barbería es diferente.</h2>
+        <p class="lead">Por eso la experiencia puede adaptarse completamente a tu identidad visual, servicios, horarios, precios y forma de trabajar.</p>
+        <p class="editorial">Tu barbería merece una experiencia de reserva a la altura de tu marca.</p>
+      </section>
+
+      <section class="section" id="problema">
+        <h2>Deja de perder tiempo organizando citas.</h2>
+        <p class="lead">Menos mensajes. Menos confusión. Más tiempo para hacer lo que realmente importa.</p>
+        <div class="compare">
+          <article class="compare-card">
+            <span class="compare-kicker">Antes</span>
+            <ol>
+              <li>Cliente escribe por WhatsApp.</li>
+              <li>Pregunta disponibilidad.</li>
+              <li>Esperas para responder.</li>
+              <li>Revisas horarios.</li>
+              <li>Coordinas.</li>
+              <li>Confirmas manualmente.</li>
+            </ol>
+          </article>
+          <article class="compare-card after">
+            <span class="compare-kicker">Después</span>
+            <ol>
+              <li>Cliente entra al enlace.</li>
+              <li>Elige servicio.</li>
+              <li>Elige fecha.</li>
+              <li>Elige hora.</li>
+              <li>Confirma.</li>
+              <li>La cita queda registrada.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="section experience">
+        <p class="eyebrow">Más que una reserva.</p>
+        <h2>No vendas solo un corte.<br>Vende una experiencia.</h2>
+        <p class="lead">Desde el primer clic hasta el momento del servicio, cada detalle comunica quién eres.</p>
+        <div class="quote-grid">
+          <blockquote>
+            <p>Tu sistema de reservas también es parte de tu marca.</p>
+          </blockquote>
+          <blockquote>
+            <p>Una experiencia digital a la altura de tu barbería.</p>
+          </blockquote>
+          <blockquote>
+            <p>Tu marca empieza desde el primer clic.</p>
+          </blockquote>
+        </div>
+      </section>
+
+      <section class="section" id="estilos">
+        <h2>Diseñado para tu estilo</h2>
+        <p class="lead">El negro y el dorado es solo una posibilidad. Toca un estilo y mira cómo el sistema se adapta.</p>
+        <div class="style-grid" id="style-grid"></div>
+      </section>
+
+      <section class="section" id="hecho">
+        <h2>Hecho para tu barbería</h2>
+        <p class="lead">Convierte tu agenda en una experiencia. Cada cliente. Cada cita. En un solo lugar.</p>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span>01</span>
+            <h3>Identidad visual</h3>
+            <p>Tu logo, colores, fotografías y estilo.</p>
+          </article>
+          <article class="feature-card">
+            <span>02</span>
+            <h3>Servicios</h3>
+            <p>Configura tus servicios, precios y duración.</p>
+          </article>
+          <article class="feature-card">
+            <span>03</span>
+            <h3>Agenda</h3>
+            <p>Define tus horarios y disponibilidad.</p>
+          </article>
+          <article class="feature-card">
+            <span>04</span>
+            <h3>Clientes</h3>
+            <p>Organiza y consulta la información de tus clientes.</p>
+          </article>
+          <article class="feature-card">
+            <span>05</span>
+            <h3>Experiencia</h3>
+            <p>Una reserva pensada alrededor de tu negocio.</p>
+          </article>
+        </div>
+      </section>
+
       <section class="section" id="servicios">
-        <h2>Servicios</h2>
-        <p class="lead">Precios de referencia. Giraldo los cambia desde su panel cuando lo necesite.</p>
-        <div class="service-cards">
-          <article class="service-card">
-            <img src="img/corte.png" alt="Corte clásico" />
-            <div>
-              <h3>Corte clásico</h3>
-              <p class="meta">45 min</p>
-            </div>
-            <div class="price">$30.000</div>
-          </article>
-          <article class="service-card">
-            <img src="img/corte-barba.png" alt="Corte y barba" />
-            <div>
-              <h3>Corte + barba</h3>
-              <p class="meta">60 min</p>
-            </div>
-            <div class="price">$40.000</div>
-          </article>
-          <article class="service-card">
-            <img src="img/barba.png" alt="Barba" />
-            <div>
-              <h3>Barba</h3>
-              <p class="meta">30 min</p>
-            </div>
-            <div class="price">$20.000</div>
-          </article>
-          <article class="service-card">
-            <img src="img/premium.png" alt="Servicio premium" />
-            <div>
-              <h3>Servicio premium</h3>
-              <p class="meta">75 min</p>
-            </div>
-            <div class="price">$55.000</div>
-          </article>
-        </div>
-        <div class="quote">
-          <p>“Uno agenda, él llega y el corte queda. Sin estar escribiendo a las once de la noche.”</p>
-          <span>Cliente en Neiva</span>
-        </div>
+        <h2>Servicios de ejemplo</h2>
+        <p class="lead">Precios demostrativos. En el producto real se editan desde el panel de cada barbería.</p>
+        <div class="service-cards" id="landing-services"></div>
       </section>
 
       <section class="section" id="cortes">
-        <h2>Cortes</h2>
-        <p class="lead">Ejemplos para el demo. Después se cambian por fotos reales de Giraldo. Toca uno y empieza a reservar.</p>
+        <h2>La imagen de tu marca</h2>
+        <p class="lead">Fotografías genéricas para el demo. En un proyecto real se reemplazan por el archivo visual de tu barbería. Toca uno y empieza a reservar.</p>
         <div class="marquee">
-          <div class="marquee-track">
-            <button class="cut-card" data-pick-service="corte"><img src="img/fade.png" alt=""><span>Fade alto</span></button>
-            <button class="cut-card" data-pick-service="corte"><img src="img/textura.png" alt=""><span>Texturizado</span></button>
-            <button class="cut-card" data-pick-service="corte"><img src="img/clasico.png" alt=""><span>Clásico</span></button>
-            <button class="cut-card" data-pick-service="corte-barba"><img src="img/corte-barba.png" alt=""><span>Corte + barba</span></button>
-            <button class="cut-card" data-pick-service="barba"><img src="img/barba.png" alt=""><span>Barba</span></button>
-            <button class="cut-card" data-pick-service="premium"><img src="img/premium.png" alt=""><span>Premium</span></button>
-            <button class="cut-card" data-pick-service="corte"><img src="img/fade.png" alt=""><span>Fade alto</span></button>
-            <button class="cut-card" data-pick-service="corte"><img src="img/textura.png" alt=""><span>Texturizado</span></button>
-            <button class="cut-card" data-pick-service="corte"><img src="img/clasico.png" alt=""><span>Clásico</span></button>
-            <button class="cut-card" data-pick-service="corte-barba"><img src="img/corte-barba.png" alt=""><span>Corte + barba</span></button>
-            <button class="cut-card" data-pick-service="barba"><img src="img/barba.png" alt=""><span>Barba</span></button>
-            <button class="cut-card" data-pick-service="premium"><img src="img/premium.png" alt=""><span>Premium</span></button>
-          </div>
+          <div class="marquee-track" id="gallery-track"></div>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="como-funciona">
         <h2>Así de fácil</h2>
-        <p class="lead">Sin filas, sin espera y sin crear cuenta.</p>
+        <p class="lead">Agenda sin mensajes interminables. Sin filas, sin espera y sin crear cuenta.</p>
         <div class="steps">
-          <div class="step-row"><div class="step-num">01</div><div><strong>Servicio</strong><p class="hint">Elige lo que te vamos a hacer.</p></div></div>
+          <div class="step-row"><div class="step-num">01</div><div><strong>Servicio</strong><p class="hint">Elige qué se va a hacer. Precio y duración quedan claros.</p></div></div>
           <div class="step-row"><div class="step-num">02</div><div><strong>Fecha</strong><p class="hint">Solo días con cupo real.</p></div></div>
           <div class="step-row"><div class="step-num">03</div><div><strong>Hora</strong><p class="hint">Las ocupadas no aparecen.</p></div></div>
-          <div class="step-row"><div class="step-num">04</div><div><strong>Tus datos</strong><p class="hint">Nombre, WhatsApp y dirección.</p></div></div>
-          <div class="step-row"><div class="step-num">05</div><div><strong>Reconfirma</strong><p class="hint">Si no confirmas, el cupo se libera y no sale en su día.</p></div></div>
+          <div class="step-row"><div class="step-num">04</div><div><strong>Datos</strong><p class="hint">Nombre y WhatsApp. Sin formularios eternos.</p></div></div>
+          <div class="step-row"><div class="step-num">05</div><div><strong>Confirmación</strong><p class="hint">La cita queda registrada. El cupo se libera si no se reconfirma.</p></div></div>
+        </div>
+        <button class="btn btn-primary btn-full steps-cta" data-action="book">Reservar una cita de prueba</button>
+      </section>
+
+      <section class="section coming-soon">
+        <p class="eyebrow">Próximamente</p>
+        <h2>Automatiza también tus conversaciones.</h2>
+        <p class="lead">Cuando tu volumen de clientes lo requiera, el sistema puede evolucionar para integrar WhatsApp y permitir que tus clientes consulten disponibilidad, agenden, confirmen, cancelen o reprogramen sus citas directamente desde la conversación.</p>
+        <p class="note-line">Es una evolución del sistema, no una función de este demo.</p>
+      </section>
+
+      <section class="section cta-close">
+        <h2>Esto podría ser el sistema de tu barbería.</h2>
+        <p class="lead">Un ejemplo de lo que podemos crear para tu marca: colores, servicios, horarios y forma de trabajar, a medida.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-full" data-action="book">Explorar demo</button>
+          <button class="btn btn-ghost btn-full" data-action="admin">Ver el panel</button>
         </div>
       </section>
 
       <footer class="footer">
-        <div class="logo"><span class="logo-g">G</span><span class="logo-text">Giraldo Barber</span></div>
-        <p style="margin-top:16px">Barbería profesional a domicilio · Neiva</p>
+        <div class="logo"><span class="logo-g" data-brand-mark>B</span><span class="logo-text" data-brand-name>BARBER STUDIO</span></div>
+        <p class="footer-line">Plataforma personalizada de reservas y gestión para barberías.</p>
         <div class="socials">
-          <a href="https://www.instagram.com/danielgiraldo_barber/" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://www.tiktok.com/@danielgiraldo_barber" target="_blank" rel="noreferrer">TikTok</a>
+          <a data-social="instagram" href="#instagram">Instagram</a>
+          <a data-social="tiktok" href="#tiktok">TikTok</a>
         </div>
         <div class="qr-box">
           <div class="qr-fake" aria-hidden="true"></div>
           <div>
-            <strong style="color:#fff">giraldobarber.com/reservar</strong>
+            <strong data-brand-url>tu-barberia.com/reservar</strong>
             <p>El enlace de la bio, WhatsApp y el QR.</p>
           </div>
         </div>
@@ -140,7 +200,7 @@
           <header class="screen-head">
             <div class="nav-row">
               <button class="back" data-action="book-back">Atrás</button>
-              <div class="logo"><span class="logo-g" style="width:32px;height:32px;font-size:15px">G</span></div>
+              <div class="logo"><span class="logo-g logo-g-sm" data-brand-mark>B</span></div>
               <span></span>
             </div>
             <div class="progress" id="book-progress"></div>
@@ -153,7 +213,7 @@
             </div>
             <div class="hidden" data-book-step="2">
               <p class="question">Fecha</p>
-              <p class="hint">Domingo descansa. Los días sin cupo no se pueden elegir.</p>
+              <p class="hint" id="date-hint">Los días sin cupo no se pueden elegir.</p>
               <div class="cal-head">
                 <button class="back" data-action="cal-prev">‹</button>
                 <strong id="cal-label"></strong>
@@ -172,8 +232,8 @@
               <p class="hint" id="details-summary"></p>
               <div class="field"><label for="f-name">Nombre</label><input id="f-name" autocomplete="name" placeholder="Juan Pérez" /></div>
               <div class="field"><label for="f-phone">WhatsApp</label><input id="f-phone" inputmode="tel" placeholder="320 000 0000" /></div>
-              <div class="field"><label for="f-address">Dirección</label><input id="f-address" placeholder="Cra 5 #12-34, Las Granjas" /></div>
-              <div class="field"><label for="f-notes">Observaciones</label><textarea id="f-notes" placeholder="Piso, portero, cómo te gusta el corte..."></textarea></div>
+              <div class="field"><label for="f-address">Sede o indicaciones</label><input id="f-address" placeholder="Sede centro (opcional)" /></div>
+              <div class="field"><label for="f-notes">Observaciones</label><textarea id="f-notes" placeholder="Cómo te gusta el corte, alergias, llegada..."></textarea></div>
             </div>
           </div>
           <div class="sticky-cta">
@@ -187,9 +247,10 @@
       <div class="shell">
         <div class="screen-body" style="padding-top:48px;">
           <div id="receipt-body"></div>
-          <div style="display:grid;gap:10px;margin-top:22px;">
+          <div class="done-actions">
             <button class="btn btn-brass btn-full" data-action="reconfirm">Reconfirmar ahora</button>
-            <button class="btn btn-ghost btn-full" data-action="see-phone">Ver el celular de Giraldo</button>
+            <button class="btn btn-ghost btn-full" data-action="see-phone">Ver el celular del barbero</button>
+            <button class="btn btn-ghost btn-full" data-action="admin">Ver el panel</button>
             <button class="btn btn-ghost btn-full" data-action="landing">Volver al inicio</button>
           </div>
         </div>
@@ -199,16 +260,18 @@
     <section class="view" data-view="admin">
       <div class="admin-layout">
         <aside class="admin-side">
-          <div class="logo"><span class="logo-g">G</span><span class="logo-text">Giraldo Barber</span></div>
-          <nav class="side-nav" style="margin-top:36px;">
+          <div class="logo"><span class="logo-g" data-brand-mark>B</span><span class="logo-text" data-brand-name>BARBER STUDIO</span></div>
+          <nav class="side-nav">
             <button data-tab="hoy">Agenda</button>
             <button data-tab="semana">Calendario</button>
             <button data-tab="clientes">Clientes</button>
-            <button data-tab="calendar">Servicios</button>
+            <button data-tab="servicios">Servicios</button>
+            <button data-tab="stats">Estadísticas</button>
+            <button data-tab="config">Configuración</button>
           </nav>
           <div class="side-user">
-            <strong>Daniel Giraldo</strong>
-            <small>Barbero · Neiva</small>
+            <strong data-brand-owner>El barbero</strong>
+            <small data-brand-role>Propietario</small>
           </div>
         </aside>
         <div class="admin-main shell">
@@ -219,18 +282,19 @@
               <button class="bell" data-action="inbox" id="bell-btn">Avisos<span class="badge hidden" id="bell-count">0</span></button>
             </div>
             <div class="nav-row">
-              <h1>Agenda de hoy</h1>
+              <h1 id="admin-title">Agenda de hoy</h1>
               <button class="back" data-action="reset">Reiniciar</button>
             </div>
           </header>
-          <div class="screen-body">
+          <div class="screen-body admin-body">
             <div data-admin-tab="hoy">
+              <p class="admin-kicker">Todo lo que necesitas saber de tu día en un solo lugar.</p>
               <div class="sync-card">
                 <div>
                   <strong>Google Calendar</strong>
-                  <p class="hint" style="margin:4px 0 0">Conectado al celular de Daniel</p>
+                  <p class="hint tight">Simulación visual. La cita se registra aquí; Calendar se sincroniza después.</p>
                 </div>
-                <span class="badge ok">En vivo</span>
+                <span class="badge ok">Demo</span>
               </div>
               <p class="hint" id="today-label"></p>
               <div id="today-list"></div>
@@ -247,19 +311,38 @@
               <p class="hint">Quedan identificados por el WhatsApp.</p>
               <div id="client-list"></div>
             </div>
-            <div class="hidden" data-admin-tab="calendar">
-              <p class="question">Calendar</p>
+            <div class="hidden" data-admin-tab="servicios">
+              <p class="question">Servicios</p>
+              <p class="hint">Catálogo demostrativo. Precios y duración se editan por barbería.</p>
+              <div id="admin-services"></div>
+              <p class="section-kicker">Calendar simulado</p>
               <p class="hint">Si el cliente no reconfirma, el evento se borra y el cupo queda libre.</p>
               <div id="calendar-list"></div>
-              <p class="section-kicker">Servicios</p>
-              <div id="admin-services"></div>
+            </div>
+            <div class="hidden" data-admin-tab="stats">
+              <p class="question">Estadísticas</p>
+              <p class="hint">Una lectura rápida del día. En el producto real se profundiza por semana y mes.</p>
+              <div class="stats-grid" id="stats-grid"></div>
+            </div>
+            <div class="hidden" data-admin-tab="config">
+              <p class="question">Configuración</p>
+              <p class="hint">Estos valores viven en un solo archivo. Cada barbería tendrá el suyo.</p>
+              <div id="config-list"></div>
+            </div>
+            <div class="hidden" data-admin-tab="mas">
+              <p class="question">Más</p>
+              <div class="more-grid">
+                <button class="more-card" data-tab="servicios"><strong>Servicios</strong><span>Precios y duración</span></button>
+                <button class="more-card" data-tab="stats"><strong>Estadísticas</strong><span>El día en números</span></button>
+                <button class="more-card" data-tab="config"><strong>Configuración</strong><span>Marca y horarios</span></button>
+              </div>
             </div>
           </div>
           <nav class="bottom-nav">
-            <button data-tab="hoy" class="on">Hoy</button>
-            <button data-tab="semana">Semana</button>
+            <button data-tab="hoy" class="on">Agenda</button>
+            <button data-tab="semana">Calendario</button>
             <button data-tab="clientes">Clientes</button>
-            <button data-tab="calendar">Calendar</button>
+            <button data-tab="mas">Más</button>
           </nav>
         </div>
       </div>
@@ -276,10 +359,10 @@
         <div class="screen-body" style="padding-top:40px;">
           <p class="eyebrow">Mensaje al cliente</p>
           <h1 class="question">¿Confirmas que sí vas a estar?</h1>
-          <p class="hint">Así Daniel no sale a una dirección donde ya no lo esperan.</p>
+          <p class="hint">Así el barbero no reserva un cupo que después queda vacío.</p>
           <div class="wa-bubble" id="reconfirm-msg"></div>
-          <div class="note-box">Si no confirmas 12 horas antes, el horario se libera y no aparece en su agenda del día.</div>
-          <div style="display:grid;gap:10px;">
+          <div class="note-box">Si no confirmas 12 horas antes, el horario se libera y no aparece en la agenda del día.</div>
+          <div class="done-actions">
             <button class="btn btn-brass btn-full" data-action="client-confirm">Sí, ahí te espero</button>
             <button class="btn btn-ghost btn-full" data-action="client-cancel">No, libera el cupo</button>
           </div>
@@ -296,6 +379,8 @@
       <button class="btn btn-ghost btn-full" data-action="close-inbox" style="margin-top:12px;">Cerrar</button>
     </div>
   </div>
+  <script src="config.js"></script>
+  <script src="calendar.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

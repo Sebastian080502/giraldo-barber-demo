@@ -1,26 +1,17 @@
-const STORAGE_KEY = "giraldo-barber-demo-v3";
-
-const SERVICES = [
-  { id: "corte", name: "Corte clásico", price: 30000, duration: 45, active: true, description: "Fade o clásico, a domicilio.", image: "img/corte.png" },
-  { id: "corte-barba", name: "Corte + barba", price: 40000, duration: 60, active: true, description: "Corte y perfilado de barba.", image: "img/corte-barba.png" },
-  { id: "barba", name: "Barba", price: 20000, duration: 30, active: true, description: "Perfilado y arreglo de barba.", image: "img/barba.png" },
-  { id: "premium", name: "Servicio premium", price: 55000, duration: 75, active: true, description: "Corte, barba, cejas y detalle.", image: "img/premium.png" },
-];
-
-const WEEKLY_HOURS = {
-  0: null,
-  1: ["08:00", "19:00"],
-  2: ["08:00", "19:00"],
-  3: ["08:00", "19:00"],
-  4: ["08:00", "19:00"],
-  5: ["08:00", "20:00"],
-  6: ["08:00", "18:00"],
-};
-
+const STORAGE_KEY = "barber-studio-demo-v1";
 const DAYS = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
 const MONTHS = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 const HOLDS_SLOT = ["por_confirmar", "confirmada"];
 const AGENDA_STATUSES = ["confirmada", "completada"];
+const ADMIN_TITLES = {
+  hoy: "Agenda de hoy",
+  semana: "Calendario",
+  clientes: "Clientes",
+  servicios: "Servicios",
+  stats: "Estadísticas",
+  config: "Configuración",
+  mas: "Más",
+};
 
 const state = {
   view: "landing",
@@ -32,6 +23,14 @@ const state = {
   selectedAppointmentId: null,
   calendarCursor: startOfMonth(new Date()),
 };
+
+function catalog() {
+  return barberConfig.services;
+}
+
+function weeklyHours() {
+  return barberConfig.workingHours;
+}
 
 function emptyBooking() {
   return { serviceId: "", date: "", time: "", name: "", phone: "", address: "", notes: "" };
@@ -109,6 +108,10 @@ function statusLabel(status) {
   }[status] || status;
 }
 
+function dayLabel(index) {
+  return DAYS[index];
+}
+
 function loadDB() {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (raw) return JSON.parse(raw);
@@ -123,47 +126,54 @@ function seedDB() {
   const today = todayISO();
   const friday = thisFridayISO();
   const db = {
-    services: SERVICES.map((s) => ({ ...s })),
+    tenantId: barberConfig.tenantId,
+    services: catalog().map((s) => ({ ...s })),
     blocked: [{ id: "blk-1", date: friday, start: "12:00", end: "14:00", reason: "No disponible" }],
     customers: [
-      { id: "c1", name: "Carlos Ramírez", phone: "3204412281", address: "Cra 5 #21-18, Las Granjas", notes: "Fade medio. Prefiere llegada puntual.", visits: 8, lastVisit: today },
-      { id: "c2", name: "Andrés Molina", phone: "3108824410", address: "Calle 8 #6-30, Centro", notes: "Barba cerrada.", visits: 5, lastVisit: today },
-      { id: "c3", name: "Felipe Castro", phone: "3152039177", address: "Cra 16 #9-12, Timanco", notes: "", visits: 3, lastVisit: today },
-      { id: "c4", name: "Juan Pérez", phone: "3001568842", address: "Cra 7 #32-15, Santa Isabel", notes: "Casa con portero.", visits: 12, lastVisit: today },
-      { id: "c5", name: "Mateo Herrera", phone: "3127780944", address: "Calle 21 #4-08, Los Lagos", notes: "", visits: 2, lastVisit: today },
-      { id: "c6", name: "Santiago Díaz", phone: "3184410092", address: "Cra 10 #4-22, Cándido", notes: "", visits: 1, lastVisit: friday },
+      { id: "c1", name: "Carlos Ramírez", phone: "3204412281", address: "Sede principal", notes: "Fade medio. Prefiere llegada puntual.", visits: 8, lastVisit: today },
+      { id: "c2", name: "Andrés López", phone: "3108824410", address: "Sede principal", notes: "Barba cerrada.", visits: 5, lastVisit: today },
+      { id: "c3", name: "Felipe Ortiz", phone: "3152039177", address: "Sede principal", notes: "", visits: 3, lastVisit: today },
+      { id: "c4", name: "Juan David", phone: "3001568842", address: "Sede principal", notes: "", visits: 12, lastVisit: today },
+      { id: "c5", name: "Mateo González", phone: "3127780944", address: "Sede principal", notes: "", visits: 2, lastVisit: today },
+      { id: "c6", name: "Santiago Díaz", phone: "3184410092", address: "Sede principal", notes: "", visits: 1, lastVisit: friday },
     ],
     appointments: [],
     notifications: [],
   };
 
-  const stamp = (id, customerId, serviceId, date, start, end, status, notes = "") => ({
-    id,
-    customerId,
-    serviceId,
-    date,
-    start,
-    end,
-    address: db.customers.find((c) => c.id === customerId).address,
-    notes,
-    status,
-    googleEventId: "gcal_" + id,
-    googleStatus: status === "confirmada" ? "confirmed" : status === "por_confirmar" ? "tentative" : "cancelled",
-  });
+  const stamp = (id, customerId, serviceId, date, start, end, status, notes = "") => {
+    const appointment = {
+      id,
+      tenantId: barberConfig.tenantId,
+      customerId,
+      serviceId,
+      date,
+      start,
+      end,
+      address: db.customers.find((c) => c.id === customerId).address,
+      notes,
+      status,
+      calendar: null,
+    };
+    appointment.calendar = status === "confirmada"
+      ? CalendarSync.onConfirm(appointment)
+      : CalendarSync.onCreate(appointment);
+    return appointment;
+  };
 
   if (parseISO(today).getDay() !== 0) {
     db.appointments.push(
       stamp("a1", "c1", "corte", today, "08:00", "08:45", "confirmada"),
       stamp("a2", "c2", "corte-barba", today, "10:00", "11:00", "confirmada", "Traer cera mate."),
-      stamp("a3", "c3", "corte", today, "12:00", "12:45", "confirmada"),
-      stamp("a4", "c4", "corte-barba", today, "14:30", "15:30", "confirmada"),
-      stamp("a5", "c5", "corte", today, "16:00", "16:45", "confirmada")
+      stamp("a3", "c3", "premium", today, "12:30", "13:30", "confirmada"),
+      stamp("a4", "c4", "corte-barba", today, "15:00", "16:00", "confirmada"),
+      stamp("a5", "c5", "corte", today, "17:00", "17:45", "confirmada")
     );
   }
 
   if (friday !== today) {
     db.appointments.push(
-      stamp("a6", "c4", "premium", friday, "09:00", "10:15", "confirmada"),
+      stamp("a6", "c4", "premium", friday, "09:00", "10:00", "confirmada"),
       stamp("a7", "c1", "barba", friday, "11:00", "11:30", "confirmada"),
       stamp("a8", "c6", "corte", friday, "17:00", "17:45", "por_confirmar")
     );
@@ -171,7 +181,7 @@ function seedDB() {
       type: "nueva_reserva",
       appointmentId: "a8",
       title: "Nueva reserva · por confirmar",
-      body: "Santiago Díaz — Corte · " + formatTime("17:00"),
+      body: "Santiago Díaz — Corte clásico · " + formatTime("17:00"),
     });
   }
 
@@ -192,7 +202,7 @@ function customerById(id) {
 }
 
 function workWindow(iso) {
-  return WEEKLY_HOURS[parseISO(iso).getDay()];
+  return weeklyHours()[parseISO(iso).getDay()];
 }
 
 function appointmentConflicts(db, date, start, end, ignoreId) {
@@ -242,7 +252,7 @@ function upsertCustomer(db, data) {
   let customer = db.customers.find((c) => c.phone === phone);
   if (customer) {
     customer.name = data.name;
-    customer.address = data.address;
+    customer.address = data.address || customer.address;
     if (data.notes) customer.notes = data.notes;
     customer.lastVisit = data.date;
     return customer;
@@ -251,7 +261,7 @@ function upsertCustomer(db, data) {
     id: "c" + Date.now(),
     name: data.name,
     phone,
-    address: data.address,
+    address: data.address || barberConfig.location.address,
     notes: data.notes || "",
     visits: 0,
     lastVisit: data.date,
@@ -277,18 +287,19 @@ function createAppointment() {
   const customer = upsertCustomer(db, state.booking);
   const appointment = {
     id: "a" + Date.now(),
+    tenantId: barberConfig.tenantId,
     customerId: customer.id,
     serviceId: service.id,
     date: state.booking.date,
     start: state.booking.time,
     end: check.end,
-    address: state.booking.address,
+    address: state.booking.address || barberConfig.location.address,
     notes: state.booking.notes,
     status: "por_confirmar",
-    googleEventId: "gcal_" + Date.now(),
-    googleStatus: "tentative",
+    calendar: null,
   };
   db.appointments.push(appointment);
+  appointment.calendar = CalendarSync.onCreate(appointment);
   pushNotice(db, {
     type: "nueva_reserva",
     appointmentId: appointment.id,
@@ -309,7 +320,7 @@ function setAppointmentStatus(id, status) {
   const service = db.services.find((s) => s.id === appointment.serviceId);
 
   if (status === "confirmada") {
-    appointment.googleStatus = "confirmed";
+    appointment.calendar = CalendarSync.onConfirm(appointment);
     customer.visits += 1;
     customer.lastVisit = appointment.date;
     pushNotice(db, {
@@ -321,20 +332,24 @@ function setAppointmentStatus(id, status) {
   }
 
   if (status === "cancelada" || status === "liberada") {
-    appointment.googleStatus = "cancelled";
+    appointment.calendar = CalendarSync.onCancel(appointment);
     pushNotice(db, {
       type: "liberada",
       appointmentId: id,
       title: status === "liberada" ? "Cupo liberado · no reconfirmó" : "Cita cancelada · cupo libre",
-      body: `${formatTime(appointment.start)} ya no aparece en la agenda ni en Google Calendar`,
+      body: `${formatTime(appointment.start)} ya no aparece en la agenda ni en Calendar`,
     });
   }
 
-  if (status === "completada") appointment.googleStatus = "confirmed";
+  if (status === "completada") appointment.calendar = CalendarSync.onConfirm(appointment);
   saveDB(db);
   if (state.lastReceipt && state.lastReceipt.appointment.id === id) {
     state.lastReceipt.appointment = appointment;
   }
+}
+
+function calendarStatus(appointment) {
+  return (appointment.calendar && appointment.calendar.status) || "tentative";
 }
 
 function unreadCount() {
@@ -363,6 +378,46 @@ function setBookStep(step) {
   renderBook();
 }
 
+function renderLanding() {
+  const services = catalog().filter((s) => s.active);
+  document.getElementById("landing-services").innerHTML = services.map((s) => `
+    <article class="service-card">
+      <img src="${s.image}" alt="${s.name}" />
+      <div>
+        <h3>${s.name}</h3>
+        <p class="meta">${s.duration} min</p>
+      </div>
+      <div class="price">${money(s.price)}</div>
+    </article>
+  `).join("");
+
+  const items = barberConfig.gallery.concat(barberConfig.gallery);
+  document.getElementById("gallery-track").innerHTML = items.map((item) => `
+    <button class="cut-card" data-pick-service="${item.serviceId}">
+      <img src="${item.image}" alt="">
+      <span>${item.label}</span>
+    </button>
+  `).join("");
+
+  document.getElementById("style-grid").innerHTML = Object.values(barberThemes).map((theme) => {
+    const t = theme.tokens;
+    return `
+      <button class="style-card" data-theme-card="${theme.id}">
+        <div class="style-swatches">
+          <i style="background:${t.bg}"></i>
+          <i style="background:${t.accent}"></i>
+          <i style="background:${t.ink}"></i>
+        </div>
+        <h3>${theme.name}</h3>
+        <p>${theme.summary}</p>
+        <small>${theme.palette}</small>
+      </button>
+    `;
+  }).join("");
+
+  document.getElementById("date-hint").textContent = barberConfig.booking.closedHint;
+}
+
 function renderBook() {
   const labels = ["Servicio", "Fecha", "Hora", "Datos"];
   document.getElementById("book-progress").innerHTML = labels.map((label, i) => {
@@ -377,12 +432,12 @@ function renderBook() {
   if (state.bookStep === 2) renderCalendar();
   if (state.bookStep === 3) renderSlots();
   if (state.bookStep === 4) renderDetailsHint();
-  document.getElementById("book-next").textContent = state.bookStep === 4 ? "Reservar horario" : "Continuar";
+  document.getElementById("book-next").textContent = state.bookStep === 4 ? "Confirmar reserva" : "Continuar";
 }
 
 function renderServices() {
-  const catalog = SERVICES.filter((s) => s.active);
-  document.getElementById("service-list").innerHTML = catalog.map((s) => `
+  const list = getDB().services.filter((s) => s.active);
+  document.getElementById("service-list").innerHTML = list.map((s) => `
       <button class="svc-card ${state.booking.serviceId === s.id ? "is-selected" : ""}" data-service="${s.id}">
         <img src="${s.image}" alt="" />
         <div class="copy">
@@ -435,15 +490,15 @@ function renderReceipt() {
   document.getElementById("receipt-body").innerHTML = `
     <div class="ok-dot">✓</div>
     <h2>Ya tienes el horario</h2>
-    <p class="hint">Giraldo ya se enteró en su celular y el evento quedó en Google Calendar. Para que salga hacia tu casa, reconfirma la cita.</p>
+    <p class="hint">La cita quedó registrada. Calendar recibe una copia tentativa. Para que salga en la agenda del día, reconfirma.</p>
     <div class="receipt">
       <div class="receipt-row"><span>Estado</span><strong>Por confirmar</strong></div>
       <div class="receipt-row"><span>Servicio</span><strong>${r.service.name}</strong></div>
       <div class="receipt-row"><span>Fecha</span><strong>${formatDateLong(r.appointment.date)}</strong></div>
       <div class="receipt-row"><span>Hora</span><strong>${formatTime(r.appointment.start)} — ${formatTime(r.appointment.end)}</strong></div>
-      <div class="receipt-row"><span>Dirección</span><strong>${r.appointment.address}</strong></div>
+      <div class="receipt-row"><span>Lugar</span><strong>${r.appointment.address}</strong></div>
       <div class="receipt-row"><span>WhatsApp</span><strong>${r.customer.phone}</strong></div>
-      <div class="receipt-row"><span>Google Calendar</span><strong>Evento tentativo</strong></div>
+      <div class="receipt-row"><span>Google Calendar</span><strong>Evento tentativo · simulado</strong></div>
     </div>
   `;
 }
@@ -452,10 +507,10 @@ function renderReconfirm() {
   const r = state.lastReceipt;
   if (!r) return;
   document.getElementById("reconfirm-msg").innerHTML = `
-    <strong>Giraldo Barber</strong><br><br>
+    <strong>${barberConfig.name}</strong><br><br>
     Hola ${r.customer.name.split(" ")[0]}, tienes una cita el ${formatDateLong(r.appointment.date)} a las ${formatTime(r.appointment.start)} — ${r.service.name}.<br><br>
-    Dirección: ${r.appointment.address}.<br><br>
-    ¿Confirmas que sí vas a estar? Si no confirmas, el horario se libera y Giraldo no sale para allá.
+    Lugar: ${r.appointment.address}.<br><br>
+    ¿Confirmas que sí vas a estar? Si no confirmas, el horario se libera.
   `;
 }
 
@@ -495,7 +550,7 @@ function appointmentCard(a, pending) {
 
 function renderAppointmentList(date) {
   const list = liveAppointments(date);
-  if (!list.length) return `<p class="empty">No hay citas confirmadas este día. Giraldo solo ve aquí lo que sí va a atender.</p>`;
+  if (!list.length) return `<p class="empty">No hay citas confirmadas este día. Aquí solo aparece lo que sí se va a atender.</p>`;
   return list.map((a) => appointmentCard(a, false)).join("");
 }
 
@@ -516,11 +571,17 @@ function renderBell() {
 
 function renderAdmin() {
   renderBell();
+  document.getElementById("admin-title").textContent = ADMIN_TITLES[state.adminTab] || "Panel";
   document.querySelectorAll("[data-admin-tab]").forEach((el) => {
     el.classList.toggle("hidden", el.dataset.adminTab !== state.adminTab);
   });
   document.querySelectorAll(".bottom-nav button, .side-nav button").forEach((btn) => {
-    btn.classList.toggle("on", btn.dataset.tab === state.adminTab);
+    const onMore = state.adminTab === "mas" || ["servicios", "stats", "config"].includes(state.adminTab);
+    if (btn.closest(".bottom-nav") && btn.dataset.tab === "mas") {
+      btn.classList.toggle("on", onMore);
+    } else {
+      btn.classList.toggle("on", btn.dataset.tab === state.adminTab);
+    }
   });
   if (state.adminTab === "hoy") {
     document.getElementById("today-label").textContent = formatDateLong(todayISO());
@@ -529,10 +590,12 @@ function renderAdmin() {
   }
   if (state.adminTab === "semana") renderWeek();
   if (state.adminTab === "clientes") renderClients();
-  if (state.adminTab === "calendar") {
-    renderGoogleCalendar();
+  if (state.adminTab === "servicios") {
     renderAdminServices();
+    renderGoogleCalendar();
   }
+  if (state.adminTab === "stats") renderStats();
+  if (state.adminTab === "config") renderConfig();
 }
 
 function startOfWeek(iso) {
@@ -587,27 +650,66 @@ function renderAdminServices() {
 
 function renderGoogleCalendar() {
   const events = getDB().appointments
-    .filter((a) => a.googleStatus !== "cancelled")
+    .filter((a) => CalendarSync.isActive(a.calendar))
     .sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
   if (!events.length) {
-    document.getElementById("calendar-list").innerHTML = `<p class="empty">No hay eventos activos en Google Calendar.</p>`;
+    document.getElementById("calendar-list").innerHTML = `<p class="empty">No hay eventos activos en Calendar.</p>`;
     return;
   }
   document.getElementById("calendar-list").innerHTML = events.map((a) => {
     const c = customerById(a.customerId);
     const s = serviceById(a.serviceId);
+    const status = calendarStatus(a);
     return `
       <article class="gcal-event">
-        <div class="gcal-bar ${a.googleStatus === "tentative" ? "tentative" : ""}"></div>
+        <div class="gcal-bar ${status === "tentative" ? "tentative" : ""}"></div>
         <div>
           <strong>${c.name} — ${s.name}</strong>
           <p class="hint" style="margin:4px 0 0;">${formatDateLong(a.date)} · ${formatTime(a.start)} — ${formatTime(a.end)}</p>
           <p class="hint" style="margin:4px 0 0;">${a.address} · WhatsApp ${c.phone}</p>
-          <span class="status">${a.googleStatus === "tentative" ? "Tentativo en Calendar" : "Confirmado en Calendar"}</span>
+          <span class="status">${status === "tentative" ? "Tentativo en Calendar" : "Confirmado en Calendar"}</span>
         </div>
       </article>
     `;
   }).join("");
+}
+
+function renderStats() {
+  const db = getDB();
+  const today = todayISO();
+  const confirmed = liveAppointments(today);
+  const pending = pendingAppointments(today);
+  const revenue = confirmed.reduce((sum, a) => {
+    const service = serviceById(a.serviceId);
+    return sum + (service ? service.price : 0);
+  }, 0);
+  document.getElementById("stats-grid").innerHTML = `
+    <article class="stat-card"><strong>${confirmed.length}</strong><span>Confirmadas hoy</span></article>
+    <article class="stat-card"><strong>${pending.length}</strong><span>Por reconfirmar</span></article>
+    <article class="stat-card"><strong>${db.customers.length}</strong><span>Clientes</span></article>
+    <article class="stat-card"><strong>${money(revenue)}</strong><span>Estimado del día</span></article>
+  `;
+}
+
+function renderConfig() {
+  const hours = Object.entries(weeklyHours()).map(([day, window]) => {
+    const label = cap(dayLabel(Number(day)));
+    return window ? `${label}: ${window[0]}–${window[1]}` : `${label}: cerrado`;
+  }).join(" · ");
+  const rows = [
+    ["Barbería", barberConfig.name],
+    ["Eslogan", barberConfig.tagline],
+    ["Ciudad", barberConfig.location.city],
+    ["Modelo", barberConfig.location.mode === "shop" ? "En sede" : "A domicilio"],
+    ["Enlace de reserva", barberConfig.bookingUrl],
+    ["Horarios", hours],
+    ["Calendar", barberConfig.features.googleCalendar.mode === "simulated" ? "Simulado · listo para conectar" : "Google"],
+    ["WhatsApp", barberConfig.features.whatsapp.comingSoon ? "Próximamente" : "Activo"],
+    ["Archivo", "config.js · un tenant, una identidad"],
+  ];
+  document.getElementById("config-list").innerHTML = rows.map(([label, value]) => `
+    <div class="config-row"><small>${label}</small><strong>${value}</strong></div>
+  `).join("");
 }
 
 function openSheet(id) {
@@ -618,12 +720,12 @@ function openSheet(id) {
   const c = customerById(a.customerId);
   const s = serviceById(a.serviceId);
   document.getElementById("sheet-content").innerHTML = `
-    <h2 style="font-family:var(--font-display);font-size:32px;letter-spacing:.06em;margin-bottom:8px;">${formatTime(a.start)} — ${c.name}</h2>
+    <h2 style="font-family:var(--serif);font-size:32px;letter-spacing:.06em;margin-bottom:8px;">${formatTime(a.start)} — ${c.name}</h2>
     <p class="hint">${s.name} · ${formatDateLong(a.date)}</p>
     <div class="receipt-row"><span>Estado</span><strong>${statusLabel(a.status)}</strong></div>
-    <div class="receipt-row"><span>Dirección</span><strong>${a.address}</strong></div>
+    <div class="receipt-row"><span>Lugar</span><strong>${a.address}</strong></div>
     <div class="receipt-row"><span>WhatsApp</span><strong>${c.phone}</strong></div>
-    <div class="receipt-row"><span>Google Calendar</span><strong>${a.googleEventId} · ${a.googleStatus}</strong></div>
+    <div class="receipt-row"><span>Google Calendar</span><strong>${(a.calendar && a.calendar.eventId) || "—"} · ${calendarStatus(a)}</strong></div>
     <div class="receipt-row"><span>Notas</span><strong>${a.notes || "Sin observaciones"}</strong></div>
     <div class="pill-row">
       ${a.status === "por_confirmar" ? `<button class="pill" data-action="ask-reconfirm">Pedir reconfirmación</button>
@@ -639,11 +741,11 @@ function showPhoneNotification() {
   const r = state.lastReceipt;
   if (!r) return;
   document.getElementById("phone-card").innerHTML = `
-    <small>Ahora · celular de Giraldo</small>
-    <h3>Giraldo Barber</h3>
+    <small>Ahora · celular del barbero</small>
+    <h3>${barberConfig.name}</h3>
     <p><strong>Nueva reserva · por confirmar</strong><br>${r.customer.name} — ${r.service.name}<br>${formatDateLong(r.appointment.date)} · ${formatTime(r.appointment.start)}</p>
-    <p style="margin-top:10px;color:#8d887d;font-size:13px;">También le acaba de llegar el evento a Google Calendar. Si el cliente no reconfirma, el aviso de la ruta del día no aparece.</p>
-    <div style="display:grid;gap:8px;margin-top:14px;">
+    <p style="margin-top:10px;">La cita ya está en el sistema. Calendar recibe una copia tentativa. Si el cliente no reconfirma, no aparece en la ruta del día.</p>
+    <div class="done-actions">
       <button class="btn btn-brass btn-full" data-action="open-admin-from-phone">Abrir agenda</button>
       <button class="btn btn-ghost btn-full" data-action="close-phone">Cerrar</button>
     </div>
@@ -660,6 +762,12 @@ function renderInbox() {
 
 function bindEvents() {
   document.body.addEventListener("click", (e) => {
+    const themeCard = e.target.closest("[data-theme-card]");
+    if (themeCard) {
+      applyTheme(themeCard.dataset.themeCard);
+      return;
+    }
+
     const t = e.target.closest("[data-action]");
     if (t) {
       const action = t.dataset.action;
@@ -704,12 +812,10 @@ function bindEvents() {
       }
       if (action === "client-confirm" && state.lastReceipt) {
         setAppointmentStatus(state.lastReceipt.appointment.id, "confirmada");
-        showPhoneNotification();
-        document.getElementById("phone-card").insertAdjacentHTML("afterbegin", "");
         document.getElementById("phone-card").innerHTML = `
-          <small>Ahora · celular de Giraldo</small>
+          <small>Ahora · celular del barbero</small>
           <h3>Cita confirmada</h3>
-          <p>${state.lastReceipt.customer.name} ya reconfirmó. El evento en Google Calendar pasó de tentativo a confirmado y ahora sí aparece en la ruta del día.</p>
+          <p>${state.lastReceipt.customer.name} ya reconfirmó. Calendar pasa de tentativo a confirmado y ahora sí aparece en la ruta del día.</p>
           <button class="btn btn-brass btn-full" data-action="open-admin-from-phone" style="margin-top:14px;">Ver agenda del día</button>
         `;
         document.getElementById("phone-overlay").classList.add("is-open");
@@ -717,9 +823,9 @@ function bindEvents() {
       if (action === "client-cancel" && state.lastReceipt) {
         setAppointmentStatus(state.lastReceipt.appointment.id, "cancelada");
         showView("admin");
-        state.adminTab = "calendar";
+        state.adminTab = "servicios";
         renderAdmin();
-        alert("Cita cancelada. El cupo quedó libre y el evento se quitó de Google Calendar. No aparece en la agenda del día.");
+        alert("Cita cancelada. El cupo quedó libre y el evento se quitó de Calendar. No aparece en la agenda del día.");
       }
       if (action === "ask-reconfirm" && state.selectedAppointmentId) {
         const db = getDB();
@@ -810,7 +916,9 @@ function handleBookNext() {
   const phone = document.getElementById("f-phone").value.trim();
   const address = document.getElementById("f-address").value.trim();
   const notes = document.getElementById("f-notes").value.trim();
-  if (!name || !phone || !address) return alert("Nombre, WhatsApp y dirección son obligatorios.");
+  if (!name) return alert("El nombre es obligatorio.");
+  if (barberConfig.booking.requirePhone && !phone) return alert("El WhatsApp es obligatorio.");
+  if (barberConfig.booking.requireAddress && !address) return alert("La dirección es obligatoria.");
   state.booking = { ...state.booking, name, phone, address, notes };
   const result = createAppointment();
   if (!result.ok) return alert(result.reason);
@@ -818,5 +926,8 @@ function handleBookNext() {
   showView("done");
 }
 
+applyBrand();
+applyTheme(getActiveThemeId());
+renderLanding();
 bindEvents();
 showView("landing");
