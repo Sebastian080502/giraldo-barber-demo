@@ -419,12 +419,6 @@ function renderLanding() {
 
 function bindMedia() {
   const videos = barberConfig.videos || {};
-  const hero = document.getElementById("hero-video");
-  if (hero && videos.hero) {
-    hero.src = videos.hero;
-    hero.poster = videos.heroPoster || "";
-    hero.play().catch(() => {});
-  }
   const interior = document.getElementById("interior-video");
   if (interior && videos.booking) {
     interior.src = videos.booking;

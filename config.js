@@ -29,12 +29,10 @@ const barberConfig = {
     role: "Propietario",
   },
   images: {
-    hero: "img/video/hero.jpg",
+    hero: "img/hero.png",
     booking: "img/corte-barba.png",
   },
   videos: {
-    hero: "img/video/hero.mp4",
-    heroPoster: "img/video/hero.jpg",
     booking: "img/video/interior.mp4",
     bookingPoster: "img/video/interior.jpg",
   },
