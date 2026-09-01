@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Giraldo Barber — Reserva tu cita</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <section class="view landing is-active" data-view="landing">
+      <div class="hero">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="topbar">
+          <div class="logo">
+            <span class="logo-g">G</span>
+            <span class="logo-text">Giraldo Barber</span>
+          </div>
+          <button class="ghost-link" data-action="admin">Panel de Giraldo</button>
+        </div>
+        <div>
+          <div class="hero-copy">
+            <div class="live-chip"><i></i> Agenda abierta ahora</div>
+            <p class="eyebrow">Barbería a domicilio · Neiva, Huila</p>
+            <h1 class="display">No es solo un corte.<br>Es tu mejor versión.</h1>
+            <p class="place">Tu corte. Donde quieras.</p>
+          </div>
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-full" data-action="book">Reserva tu cita</button>
+            <a class="btn btn-ghost btn-full" href="#servicios">Ver servicios</a>
+          </div>
+          <div class="pillars">
+            <div class="pillar"><strong>01</strong>Experiencia premium</div>
+            <div class="pillar"><strong>02</strong>A domicilio</div>
+            <div class="pillar"><strong>03</strong>100% personalizado</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section" id="servicios">
+        <h2>Servicios</h2>
+        <p class="lead">Precios de referencia. Giraldo los cambia desde su panel cuando lo necesite.</p>
+        <div class="service-cards">
+          <article class="service-card">
+            <img src="img/corte.png" alt="Corte clásico" />
+            <div>
+              <h3>Corte clásico</h3>
+              <p class="meta">45 min</p>
+            </div>
+            <div class="price">$30.000</div>
+          </article>
+          <article class="service-card">
+            <img src="img/corte-barba.png" alt="Corte y barba" />
+            <div>
+              <h3>Corte + barba</h3>
+              <p class="meta">60 min</p>
+            </div>
+            <div class="price">$40.000</div>
+          </article>
+          <article class="service-card">
+            <img src="img/barba.png" alt="Barba" />
+            <div>
+              <h3>Barba</h3>
+              <p class="meta">30 min</p>
+            </div>
+            <div class="price">$20.000</div>
+          </article>
+          <article class="service-card">
+            <img src="img/premium.png" alt="Servicio premium" />
+            <div>
+              <h3>Servicio premium</h3>
+              <p class="meta">75 min</p>
+            </div>
+            <div class="price">$55.000</div>
+          </article>
+        </div>
+        <div class="quote">
+          <p>“Uno agenda, él llega y el corte queda. Sin estar escribiendo a las once de la noche.”</p>
+          <span>Cliente en Neiva</span>
+        </div>
+      </section>
+
+      <section class="section" id="cortes">
+        <h2>Cortes</h2>
+        <p class="lead">Ejemplos para el demo. Después se cambian por fotos reales de Giraldo. Toca uno y empieza a reservar.</p>
+        <div class="marquee">
+          <div class="marquee-track">
+            <button class="cut-card" data-pick-service="corte"><img src="img/fade.png" alt=""><span>Fade alto</span></button>
+            <button class="cut-card" data-pick-service="corte"><img src="img/textura.png" alt=""><span>Texturizado</span></button>
+            <button class="cut-card" data-pick-service="corte"><img src="img/clasico.png" alt=""><span>Clásico</span></button>
+            <button class="cut-card" data-pick-service="corte-barba"><img src="img/corte-barba.png" alt=""><span>Corte + barba</span></button>
+            <button class="cut-card" data-pick-service="barba"><img src="img/barba.png" alt=""><span>Barba</span></button>
+            <button class="cut-card" data-pick-service="premium"><img src="img/premium.png" alt=""><span>Premium</span></button>
+            <button class="cut-card" data-pick-service="corte"><img src="img/fade.png" alt=""><span>Fade alto</span></button>
+            <button class="cut-card" data-pick-service="corte"><img src="img/textura.png" alt=""><span>Texturizado</span></button>
+            <button class="cut-card" data-pick-service="corte"><img src="img/clasico.png" alt=""><span>Clásico</span></button>
+            <button class="cut-card" data-pick-service="corte-barba"><img src="img/corte-barba.png" alt=""><span>Corte + barba</span></button>
+            <button class="cut-card" data-pick-service="barba"><img src="img/barba.png" alt=""><span>Barba</span></button>
+            <button class="cut-card" data-pick-service="premium"><img src="img/premium.png" alt=""><span>Premium</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Así de fácil</h2>
+        <p class="lead">Sin filas, sin espera y sin crear cuenta.</p>
+        <div class="steps">
+          <div class="step-row"><div class="step-num">01</div><div><strong>Servicio</strong><p class="hint">Elige lo que te vamos a hacer.</p></div></div>
+          <div class="step-row"><div class="step-num">02</div><div><strong>Fecha</strong><p class="hint">Solo días con cupo real.</p></div></div>
+          <div class="step-row"><div class="step-num">03</div><div><strong>Hora</strong><p class="hint">Las ocupadas no aparecen.</p></div></div>
+          <div class="step-row"><div class="step-num">04</div><div><strong>Tus datos</strong><p class="hint">Nombre, WhatsApp y dirección.</p></div></div>
+          <div class="step-row"><div class="step-num">05</div><div><strong>Reconfirma</strong><p class="hint">Si no confirmas, el cupo se libera y no sale en su día.</p></div></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="logo"><span class="logo-g">G</span><span class="logo-text">Giraldo Barber</span></div>
+        <p style="margin-top:16px">Barbería profesional a domicilio · Neiva</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/danielgiraldo_barber/" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://www.tiktok.com/@danielgiraldo_barber" target="_blank" rel="noreferrer">TikTok</a>
+        </div>
+        <div class="qr-box">
+          <div class="qr-fake" aria-hidden="true"></div>
+          <div>
+            <strong style="color:#fff">giraldobarber.com/reservar</strong>
+            <p>El enlace de la bio, WhatsApp y el QR.</p>
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <section class="view" data-view="book">
+      <div class="book-layout">
+        <aside class="book-visual" aria-hidden="true"></aside>
+        <div class="shell">
+          <header class="screen-head">
+            <div class="nav-row">
+              <button class="back" data-action="book-back">Atrás</button>
+              <div class="logo"><span class="logo-g" style="width:32px;height:32px;font-size:15px">G</span></div>
+              <span></span>
+            </div>
+            <div class="progress" id="book-progress"></div>
+          </header>
+          <div class="screen-body">
+            <div data-book-step="1">
+              <p class="question">Servicio</p>
+              <p class="hint">Elige con calma. Precio y duración quedan claros desde el inicio.</p>
+              <div class="svc-grid" id="service-list"></div>
+            </div>
+            <div class="hidden" data-book-step="2">
+              <p class="question">Fecha</p>
+              <p class="hint">Domingo descansa. Los días sin cupo no se pueden elegir.</p>
+              <div class="cal-head">
+                <button class="back" data-action="cal-prev">‹</button>
+                <strong id="cal-label"></strong>
+                <button class="back" data-action="cal-next">›</button>
+              </div>
+              <div class="weekdays"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+              <div class="cal-grid" id="cal-grid"></div>
+            </div>
+            <div class="hidden" data-book-step="3">
+              <p class="question">Hora</p>
+              <p class="hint" id="slot-date-label"></p>
+              <div id="slot-list"></div>
+            </div>
+            <div class="hidden" data-book-step="4">
+              <p class="question">Tus datos</p>
+              <p class="hint" id="details-summary"></p>
+              <div class="field"><label for="f-name">Nombre</label><input id="f-name" autocomplete="name" placeholder="Juan Pérez" /></div>
+              <div class="field"><label for="f-phone">WhatsApp</label><input id="f-phone" inputmode="tel" placeholder="320 000 0000" /></div>
+              <div class="field"><label for="f-address">Dirección</label><input id="f-address" placeholder="Cra 5 #12-34, Las Granjas" /></div>
+              <div class="field"><label for="f-notes">Observaciones</label><textarea id="f-notes" placeholder="Piso, portero, cómo te gusta el corte..."></textarea></div>
+            </div>
+          </div>
+          <div class="sticky-cta">
+            <button class="btn btn-brass btn-full" id="book-next" data-action="book-next">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" data-view="done">
+      <div class="shell">
+        <div class="screen-body" style="padding-top:48px;">
+          <div id="receipt-body"></div>
+          <div style="display:grid;gap:10px;margin-top:22px;">
+            <button class="btn btn-brass btn-full" data-action="reconfirm">Reconfirmar ahora</button>
+            <button class="btn btn-ghost btn-full" data-action="see-phone">Ver el celular de Giraldo</button>
+            <button class="btn btn-ghost btn-full" data-action="landing">Volver al inicio</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" data-view="admin">
+      <div class="admin-layout">
+        <aside class="admin-side">
+          <div class="logo"><span class="logo-g">G</span><span class="logo-text">Giraldo Barber</span></div>
+          <nav class="side-nav" style="margin-top:36px;">
+            <button data-tab="hoy">Agenda</button>
+            <button data-tab="semana">Calendario</button>
+            <button data-tab="clientes">Clientes</button>
+            <button data-tab="calendar">Servicios</button>
+          </nav>
+          <div class="side-user">
+            <strong>Daniel Giraldo</strong>
+            <small>Barbero · Neiva</small>
+          </div>
+        </aside>
+        <div class="admin-main shell">
+          <header class="screen-head">
+            <div class="nav-row">
+              <button class="back" data-action="landing">Salir</button>
+              <span class="logo-text">Panel</span>
+              <button class="bell" data-action="inbox" id="bell-btn">Avisos<span class="badge hidden" id="bell-count">0</span></button>
+            </div>
+            <div class="nav-row">
+              <h1>Agenda de hoy</h1>
+              <button class="back" data-action="reset">Reiniciar</button>
+            </div>
+          </header>
+          <div class="screen-body">
+            <div data-admin-tab="hoy">
+              <div class="sync-card">
+                <div>
+                  <strong>Google Calendar</strong>
+                  <p class="hint" style="margin:4px 0 0">Conectado al celular de Daniel</p>
+                </div>
+                <span class="badge ok">En vivo</span>
+              </div>
+              <p class="hint" id="today-label"></p>
+              <div id="today-list"></div>
+              <div id="today-pending"></div>
+            </div>
+            <div class="hidden" data-admin-tab="semana">
+              <p class="question">Semana</p>
+              <p class="hint">Toca un día para ver los servicios.</p>
+              <div class="week-strip" id="week-strip"></div>
+              <div id="week-list"></div>
+            </div>
+            <div class="hidden" data-admin-tab="clientes">
+              <p class="question">Clientes</p>
+              <p class="hint">Quedan identificados por el WhatsApp.</p>
+              <div id="client-list"></div>
+            </div>
+            <div class="hidden" data-admin-tab="calendar">
+              <p class="question">Calendar</p>
+              <p class="hint">Si el cliente no reconfirma, el evento se borra y el cupo queda libre.</p>
+              <div id="calendar-list"></div>
+              <p class="section-kicker">Servicios</p>
+              <div id="admin-services"></div>
+            </div>
+          </div>
+          <nav class="bottom-nav">
+            <button data-tab="hoy" class="on">Hoy</button>
+            <button data-tab="semana">Semana</button>
+            <button data-tab="clientes">Clientes</button>
+            <button data-tab="calendar">Calendar</button>
+          </nav>
+        </div>
+      </div>
+      <div class="sheet" id="sheet">
+        <div class="sheet-card">
+          <div id="sheet-content"></div>
+          <button class="btn btn-ghost btn-full" data-action="close-sheet" style="margin-top:12px;">Cerrar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" data-view="reconfirm">
+      <div class="shell">
+        <div class="screen-body" style="padding-top:40px;">
+          <p class="eyebrow">Mensaje al cliente</p>
+          <h1 class="question">¿Confirmas que sí vas a estar?</h1>
+          <p class="hint">Así Daniel no sale a una dirección donde ya no lo esperan.</p>
+          <div class="wa-bubble" id="reconfirm-msg"></div>
+          <div class="note-box">Si no confirmas 12 horas antes, el horario se libera y no aparece en su agenda del día.</div>
+          <div style="display:grid;gap:10px;">
+            <button class="btn btn-brass btn-full" data-action="client-confirm">Sí, ahí te espero</button>
+            <button class="btn btn-ghost btn-full" data-action="client-cancel">No, libera el cupo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="phone-overlay" id="phone-overlay"><div class="notify-card" id="phone-card"></div></div>
+  <div class="inbox" id="inbox">
+    <div class="notify-card">
+      <small>Avisos en tiempo real</small>
+      <div id="inbox-list"></div>
+      <button class="btn btn-ghost btn-full" data-action="close-inbox" style="margin-top:12px;">Cerrar</button>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
