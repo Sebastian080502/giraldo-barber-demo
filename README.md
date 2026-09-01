@@ -4,6 +4,8 @@ Demo visual con datos de ejemplo. No es el producto final: no hay backend, ni lo
 
 La identidad de este demo es **BARBER STUDIO**. Nombre, colores, servicios, horarios y copy viven en `config.js` para poder adaptarlos a otra barbería sin reescribir el flujo.
 
+**Demo en vivo:** [sebastian080502.github.io/giraldo-barber-demo](https://sebastian080502.github.io/giraldo-barber-demo/)
+
 ## Cómo abrirlo
 
 Abre `index.html` en el navegador (Chrome o Safari). En el celular se ve como la app.
