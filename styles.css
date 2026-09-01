@@ -134,33 +134,39 @@ html { scroll-behavior: smooth; }
 .landing { overflow: auto; max-height: 100dvh; }
 
 .hero {
-  min-height: calc(100dvh - 38px);
+  min-height: 68svh;
+  height: 72svh;
+  max-height: 740px;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 22px max(24px, env(safe-area-inset-right)) 40px max(24px, env(safe-area-inset-left));
+  padding: 20px max(24px, env(safe-area-inset-right)) 28px max(24px, env(safe-area-inset-left));
 }
-.hero-bg {
+.hero-photo {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% center;
   z-index: 0;
+}
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   pointer-events: none;
-  background-color: var(--bg);
-  background-image: var(--hero-overlay), var(--hero-image);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: var(--hero-overlay);
 }
 .hero-bottom {
   position: relative;
   z-index: 2;
-  max-width: 420px;
-  padding-bottom: 8px;
+  max-width: 440px;
 }
-.hero-bottom .btn { max-width: 280px; }
-.hero .topbar { z-index: 2; }
+.hero-bottom .btn { width: auto; min-width: 180px; }
+.hero .topbar { position: relative; z-index: 2; }
 
 .section.tight { padding-top: 36px; padding-bottom: 36px; }
 
@@ -874,6 +880,12 @@ html { scroll-behavior: smooth; }
 
 @media (min-width: 900px) {
   .hero, .section, .footer { padding-left: 7vw; padding-right: 7vw; }
+  .hero {
+    height: 78svh;
+    min-height: 640px;
+    max-height: 860px;
+  }
+  .hero-photo { object-position: 72% 28%; }
   .service-cards, .style-grid, .feature-grid, .compare, .quote-grid { grid-template-columns: 1fr 1fr; }
   .feature-grid { grid-template-columns: repeat(3, 1fr); }
   .feature-card:nth-child(4), .feature-card:nth-child(5) { grid-column: span 1; }
@@ -901,11 +913,15 @@ html { scroll-behavior: smooth; }
   .logo-text { letter-spacing: 0.18em; font-size: 10px; }
   .ghost-link { flex-shrink: 0; letter-spacing: 0.1em; }
   .hero {
-    min-height: 100dvh;
+    min-height: 58svh;
+    height: 58svh;
+    max-height: 560px;
     overflow: hidden;
-    padding: 16px 18px 28px;
+    padding: 16px 18px 22px;
     gap: 8px;
   }
+  .hero-photo { object-position: 78% 18%; }
+  .hero-bottom .btn { width: 100%; min-width: 0; }
   .hero-copy { padding: 18px 0 14px; }
   .display {
     font-size: clamp(26px, 8vw, 38px);

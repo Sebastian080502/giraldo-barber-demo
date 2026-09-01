@@ -95,7 +95,7 @@ const barberThemes = {
       accent: "#c4a35a",
       accent2: "#e0c37a",
       accentInk: "#111111",
-      heroOverlay: "linear-gradient(180deg, rgba(7,7,7,0.28) 0%, rgba(7,7,7,0.78) 68%, #070707 100%)",
+      heroOverlay: "linear-gradient(180deg, rgba(7,7,7,0.42) 0%, rgba(7,7,7,0.08) 40%, rgba(7,7,7,0.46) 100%)",
     },
   },
   urbana: {
@@ -114,7 +114,7 @@ const barberThemes = {
       accent: "#d61f26",
       accent2: "#f04545",
       accentInk: "#ffffff",
-      heroOverlay: "linear-gradient(180deg, rgba(9,9,9,0.35) 0%, rgba(9,9,9,0.82) 70%, #090909 100%)",
+      heroOverlay: "linear-gradient(180deg, rgba(9,9,9,0.4) 0%, rgba(9,9,9,0.08) 40%, rgba(9,9,9,0.48) 100%)",
     },
   },
   minimalista: {
@@ -133,7 +133,7 @@ const barberThemes = {
       accent: "#121212",
       accent2: "#2a2a2a",
       accentInk: "#ffffff",
-      heroOverlay: "linear-gradient(180deg, rgba(246,244,241,0.18) 0%, rgba(246,244,241,0.78) 68%, #f6f4f1 100%)",
+      heroOverlay: "linear-gradient(180deg, rgba(246,244,241,0.35) 0%, rgba(246,244,241,0.05) 42%, rgba(246,244,241,0.28) 100%)",
     },
   },
   classic: {
@@ -152,7 +152,7 @@ const barberThemes = {
       accent: "#c4b59a",
       accent2: "#e0d3bb",
       accentInk: "#161310",
-      heroOverlay: "linear-gradient(180deg, rgba(18,16,14,0.3) 0%, rgba(18,16,14,0.8) 70%, #12100e 100%)",
+      heroOverlay: "linear-gradient(180deg, rgba(18,16,14,0.4) 0%, rgba(18,16,14,0.08) 40%, rgba(18,16,14,0.48) 100%)",
     },
   },
   modern: {
@@ -171,7 +171,7 @@ const barberThemes = {
       accent: "#7aa6ff",
       accent2: "#a8c6ff",
       accentInk: "#0b1020",
-      heroOverlay: "linear-gradient(180deg, rgba(9,13,22,0.28) 0%, rgba(9,13,22,0.82) 70%, #090d16 100%)",
+      heroOverlay: "linear-gradient(180deg, rgba(9,13,22,0.4) 0%, rgba(9,13,22,0.08) 40%, rgba(9,13,22,0.48) 100%)",
     },
   },
 };
